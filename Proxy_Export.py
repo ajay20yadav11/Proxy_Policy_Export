@@ -11,37 +11,24 @@ import xmltodict
 import pprint
 import json
 import pandas as pd
-import csv
 import xlsxwriter
 
 
 print('Start of Python Script')
 print('*' * 100)
 
-with open("proxy.xml", "r") as f:
-    my_xml = f.read()
-
-
+my_xml = open("proxy.xml", "r").read()
 
 pp = pprint.PrettyPrinter(indent=4)
 new_data = json.dumps(xmltodict.parse(my_xml))
 
 data = json.loads(new_data)
 
-new_line = []
+new_line = [ anim for anim in data["config"]["wga_config"]["prox_acl_custom_categories"]["prox_acl_custom_category"] ]
 
-for line in data["config"]["wga_config"]["prox_acl_custom_categories"][
-    "prox_acl_custom_category"
-]:
+url_with_only_url_name, url_with_only_regex_name, url_with_both_url_name, url_with_both_url_name_url, url_with_both_url_name_regex = {},{},{},{},{}
 
-    new_line.append(line)
-
-
-url_with_only_url_name = {}
-url_with_only_regex_name = {}
-url_with_both_url_name = {}
-url_with_both_url_name_url = {}
-url_with_both_url_name_regex = {}
+df_with_actual_regex, df_with_both_url, df_with_actual_url, df_with_regex_name, df_with_url_name = [],[],[],[],[]
 
 NoneType = type(None)
 
@@ -77,12 +64,6 @@ for line in new_line:
         ]["prox_acl_custom_category_regex"]
 
 
-df_with_actual_regex = []
-df_with_both_url = []
-df_with_url_name = []
-df_with_actual_url = []
-df_with_regex_name = []
-
 
 for key, value in url_with_only_url_name.items():
     df_with_url_name.append(key)
@@ -93,22 +74,11 @@ for key, value in url_with_only_regex_name.items():
     df_with_actual_regex.append(value)
 
 
-ip_in_line_data = []
-
-for line in data["config"]["wga_config"]["prox_acl_policy_groups"][
-    "prox_acl_group"
-]:
-    ip_in_line_data.append(line)
-
+ip_in_line_data = [ anim for anim in data["config"]["wga_config"]["prox_acl_policy_groups"]["prox_acl_group"] ]
 
 policy_name = []
 
-search = "prox_acl_group_ips"
-only_ip = []
-
-for line in ip_in_line_data:
-    if search in line:
-        only_ip.append(line)
+only_ip = [ anim for anim in ip_in_line_data if "prox_acl_group_ips" in anim ]
 
 policy_map = {}
 
