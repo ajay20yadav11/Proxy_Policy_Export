@@ -17,7 +17,9 @@ import xlsxwriter
 print('Start of Python Script')
 print('*' * 100)
 
-my_xml = open("proxy_wsa.xml", "r").read()
+filepath = input('Enter the file name: ')
+
+my_xml = open(filepath, "r").read()
 
 pp = pprint.PrettyPrinter(indent=4)
 new_data = json.dumps(xmltodict.parse(my_xml))
@@ -89,7 +91,7 @@ for line in only_ip:
             "prox_acl_group_ips"
         ]["prox_acl_group_ip"]
     else:
-        policy_map[line["prox_acl_group_id"]] = "NO IP Configured"
+        policy_map[line["prox_acl_group_id"]] = "No IP Configured"
 
 
 copy_to_workbook = xlsxwriter.Workbook("Proxy_Rule.xlsx")
