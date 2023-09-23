@@ -1,10 +1,20 @@
-Using Proxy_Polixy_Export.py now network security engineer can export the policy and url categories into an excel sheet.
+Proxy Policy Export (Proxy_Policy_Export.py) is a Python script designed to assist network security engineers in exporting policies and URL categories from a Cisco Web Security Appliance (WSA) device to an Excel spreadsheet. This tool provides a workaround for situations where the WSA device lacks a native feature to export this information to Excel.
 
-Current Cisco WSA (Web Security Appliance) doesn't have a provision to export policy and url categories to excel.
+## Prerequisites
 
-Follow below steps to export from WSA:
+Before using this script, ensure you have the following:
 
-1. Login to WSA device with admin crediantials.
-2. Navigate to Configuration File and export to a local directory(by default format is XML) where python script is present to work.
-3. Run the python scrpt.
-4. Now in directory an excel file is present which has Policy and URL categories detail.
+1. A Cisco Web Security Appliance (WSA) device accessible via a network connection.
+2. Administrative credentials to access the WSA device.
+3. Python 3.x installed on your local machine.
+
+## Usage
+
+Follow these steps to export policies and URL categories from the WSA device:
+
+1. **Login to WSA Device:** Use your admin credentials to log in to the Cisco WSA device.
+
+2. **Export Configuration File:** Navigate to the Configuration File section on the WSA device's web interface. Export the configuration file to a local directory. By default, the format of the exported file is XML. Save this file in the same directory where the Python script (Proxy_Policy_Export.py) is located.
+
+3. **Run the Script:** Open your terminal or command prompt, navigate to the directory containing the script and the exported XML file, and execute the Python script using the following command:
+
